@@ -55,6 +55,14 @@ dependencies {
   provided "org.codehaus.groovy:groovy-all:$groovyVersion"
   provided "io.vertx:lang-groovy:$groovyLangModVersion@jar"
 
+  compile "com.jetdrone:mod-bson-io:2.0.0"
+  compile "io.vertx:mod-mysql-postgresql:0.3.0-SNAPSHOT"
+  compile "com.google.javascript:closure-compiler:v20140508"
+  // TODO: benchmark lesscss-java against Asual's lesscss-engine
+  compile "org.lesscss:lesscss:1.7.0.1.1"
+  // TODO: minify CSS with Closure Stylesheets, YUI Compressor, or CSSO (through Rhino)
+  // TODO: consider using Japid or Closure Templates instead of Groovy templates
+  // TODO: use htmlcompressor on Groovy Templates. Use only <% ... %> syntax in views
 }
 
 test {
