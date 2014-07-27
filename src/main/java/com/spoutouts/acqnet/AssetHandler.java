@@ -1,5 +1,6 @@
 package com.spoutouts.acqnet;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,29 +9,47 @@ import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.eventbus.Message;
 import org.vertx.java.core.file.FileSystem;
-import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.platform.Container;
 
 import com.jetdrone.vertx.mods.bson.BSON;
+import com.jetdrone.vertx.yoke.Middleware;
+import com.jetdrone.vertx.yoke.Yoke;
+import com.jetdrone.vertx.yoke.middleware.Static;
+import com.jetdrone.vertx.yoke.middleware.YokeRequest;
+import com.sun.istack.internal.NotNull;
 
-//TODO: implement caching. see https://gist.github.com/Ryan-ZA/8375100
-public class AssetHandler implements Handler<HttpServerRequest> {
+public class AssetHandler extends Middleware {
 	private static final int COMPILE_TIMEOUT = 3000;
 
-	private final Container container;
 	private final Vertx vertx;
+	private final Container container;
 	private final String instanceId;
+	private final String srcRoot, dstRoot;
+	private final Static regularAssets, compiledAssets;
 
-	public AssetHandler(Container container, Vertx vertx, String instanceId) {
-		this.container = container;
+	public AssetHandler(Vertx vertx, Container container, String instanceId, String srcRoot, String dstRoot) {
 		this.vertx = vertx;
+		this.container = container;
 		this.instanceId = instanceId;
+		this.srcRoot = srcRoot;
+		this.dstRoot = dstRoot;
+		this.regularAssets = new Static(srcRoot);
+		this.compiledAssets = new Static(dstRoot);
 	}
 
-	private void compile(HttpServerRequest req, String source, String oldExtension, String newExtension, Handler<String> success, Handler<String> fail, boolean[] isRespClosed) {
+	@Override
+	public Middleware init(@NotNull final Yoke yoke, @NotNull final String mount) {
+		regularAssets.init(yoke, mount);
+		compiledAssets.init(yoke, mount);
+		return super.init(yoke, mount);
+	}
+
+	private void compile(YokeRequest req, String source, boolean precompiled, String oldExtension, String newExtension, Handler<String> success, Handler<String> fail, boolean[] isRespClosed) {
 		FileSystem fileSystem = vertx.fileSystem();
-		String dest = source.substring(0, source.length() - oldExtension.length()) + newExtension;
+		String dest = dstRoot + source.substring((precompiled ? dstRoot : srcRoot).length(), source.length() - oldExtension.length()) + newExtension;
 		String address = CompilerVerticle.class.getCanonicalName() + oldExtension;
+
+		fileSystem.mkdirSync(dest.substring(0, Math.max(dest.lastIndexOf('/'), dest.lastIndexOf(File.separatorChar))), true);
 		if (fileSystem.existsSync(dest) && (!fileSystem.existsSync(source) || fileSystem.propsSync(dest).lastModifiedTime().getTime() >= fileSystem.propsSync(source).lastModifiedTime().getTime())) {
 			//already compiled at its latest version
 			if (isRespClosed[0])
@@ -88,44 +107,48 @@ public class AssetHandler implements Handler<HttpServerRequest> {
 		}
 	}
 
-	private void baseFileReady(HttpServerRequest req, String basePath, boolean[] isRespClosed) {
-		boolean js = basePath.endsWith(".js");
-		boolean css = basePath.endsWith(".css");
+	private void baseFileReady(YokeRequest req, String srcPath, boolean precompiled, boolean[] isRespClosed, Handler<Object> next) {
+		boolean js = srcPath.endsWith(".js");
+		boolean css = srcPath.endsWith(".css");
 		boolean minifiedPreferable = req.query() != null && req.query().contains("min");
-		//String altPath;
-		if (js && basePath.endsWith(".min.js") || css && basePath.endsWith(".min.css"))
-			//client wants the raw minified file without further processing
-			/*if (!vertx.fileSystem().existsSync(basePath))
-				//.min file doesn't exist but source file does, so minify it
-				compile(req, altPath = basePath.substring(0, basePath.lastIndexOf(".min")) + basePath.substring(basePath.lastIndexOf(".")), altPath.substring(altPath.lastIndexOf(".")), altPath.substring(altPath.lastIndexOf(".min")), dest -> req.response().sendFile(dest), reason -> req.response().setStatusCode(500).end("Failed to compile minified file"), isRespClosed);
-			else
-				//bypass modification time checks on source file if client explicitly requested min file*/
-				req.response().sendFile(basePath);
-		else if (js && minifiedPreferable)
+		if (js && minifiedPreferable)
 			//client wants the source file in minified form. make sure minified file is up to date
-			compile(req, basePath, ".js", ".min.js", dest -> req.response().sendFile(dest), reason -> req.response().sendFile(basePath), isRespClosed);
+			compile(req, srcPath, precompiled, ".js", ".js", dest -> compiledAssets.handle(req, next), reason -> regularAssets.handle(req, next), isRespClosed);
 		else if (css && minifiedPreferable)
 			//client wants the source file in minified form. make sure minified file is up to date
-			compile(req, basePath, ".css", ".min.css", dest -> req.response().sendFile(dest), reason -> req.response().sendFile(basePath), isRespClosed);
+			compile(req, srcPath, precompiled, ".css", ".css", dest -> compiledAssets.handle(req, next), reason -> regularAssets.handle(req, next), isRespClosed);
+		else if (precompiled)
+			//e.g. .less file
+			compiledAssets.handle(req, next);
 		else
 			//no minified files requested or none available
-			req.response().sendFile(basePath);
+			regularAssets.handle(req, next);
+	}
+
+	private void handleInternal(boolean[] isRespClosed, YokeRequest req, Handler<Object> next) {
+		String reqPath = req.normalizedPath().substring(mount.length());
+		String srcPath = srcRoot + reqPath;
+		if (srcPath.endsWith(".css") && vertx.fileSystem().existsSync(srcPath = srcPath.substring(0, srcPath.length() - ".css".length()) + ".less"))
+			//even if the .css file exists, call compile to ensure it's modified after .less file was 
+			compile(req, srcPath, false, ".less", ".css", dest -> baseFileReady(req, dstRoot + reqPath, true, isRespClosed, next), reason -> req.response().setStatusCode(500).end("Failed to compile LESS to CSS"), isRespClosed);
+		else if (vertx.fileSystem().existsSync(srcPath))
+			//file exists
+			baseFileReady(req, srcPath, false, isRespClosed, next);
+		else
+			//the file does not exist
+			regularAssets.handle(req, next);
+		
 	}
 
 	@Override
-	public void handle(HttpServerRequest req) {
+	public void handle(YokeRequest req, Handler<Object> next) {
 		boolean[] isRespClosed = { false };
-		req.response().closeHandler(v -> isRespClosed[0] = true);
-		String basePath = "./www" + req.path();
-		String altPath;
-		if (basePath.endsWith(".css") && vertx.fileSystem().existsSync(altPath = basePath.substring(0, basePath.length() - (/*basePath.endsWith(".min.css") ? ".min.css".length() : */".css".length())) + ".less"))
-			//even if the .css file exists, call compile to ensure it's modified after .less file was 
-			compile(req, altPath, ".less", ".css", dest -> baseFileReady(req, basePath, isRespClosed), reason -> req.response().setStatusCode(500).end("Failed to compile LESS to CSS"), isRespClosed);
-		else if (vertx.fileSystem().existsSync(basePath)/* || (basePath.endsWith(".min.css") || basePath.endsWith(".min.js")) && vertx.fileSystem().existsSync(basePath.substring(0, basePath.lastIndexOf(".min")) + basePath.substring(basePath.lastIndexOf(".")))*/)
-			//file exists
-			baseFileReady(req, basePath, isRespClosed);
-		else
-			//the file does not exist
-			req.response().setStatusCode(404).end();
-   }
+		try {
+			req.response().closeHandler(v -> isRespClosed[0] = true);
+			handleInternal(isRespClosed, req, next);
+		} catch (Throwable t) {
+			if (!isRespClosed[0])
+				next.handle(t.toString());
+		}
+	}
 }

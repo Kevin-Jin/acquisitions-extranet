@@ -37,6 +37,7 @@ public class CompilerVerticle extends Verticle {
 
 		Compiler compiler = new Compiler();
 		CompilerOptions options = new CompilerOptions();
+		options.setCssRenamingMap(GoogleClosureState.INSTANCE.jsCssMapper);
 		CompilationLevel.SIMPLE_OPTIMIZATIONS.setOptionsForCompilationLevel(options);
 		List<SourceFile> externs;
 		try {
@@ -146,10 +147,19 @@ public class CompilerVerticle extends Verticle {
 		});
 	}
 
+	private void soyBuild(Message<Integer> event) {
+		ClosureTemplateEngine engine = ClosureTemplateEngine.getInstance(event.body());
+		if (engine == null)
+			event.reply("Invalid ClosureTemplateEngine ID passed");
+		else
+			event.reply(engine.build());
+	}
+
 	@Override
 	public void start() {
 		vertx.eventBus().registerLocalHandler(CompilerVerticle.class.getCanonicalName() + ".js", this::jsMinify);
 		vertx.eventBus().registerLocalHandler(CompilerVerticle.class.getCanonicalName() + ".less", this::lessToCss);
 		vertx.eventBus().registerLocalHandler(CompilerVerticle.class.getCanonicalName() + ".css", this::cssMinify);
+		vertx.eventBus().registerLocalHandler(CompilerVerticle.class.getCanonicalName() + ".soy", this::soyBuild);
 	}
 }

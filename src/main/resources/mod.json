@@ -1,6 +1,6 @@
 {
   "main":"com.spoutouts.acqnet.Boot",
-  "includes": "com.jetdrone~mod-bson-io~2.0.0,io.vertx~mod-mysql-postgresql~0.3.0-SNAPSHOT",
+  "includes": "com.jetdrone~yoke~2.0.1-SNAPSHOT,com.jetdrone~mod-bson-io~2.0.0,io.vertx~mod-mysql-postgresql~0.3.0-SNAPSHOT,io.vertx~mod-mailer~2.1.0-SNAPSHOT",
 
   "auto-redeploy": true,
   "preserve-cwd": false
