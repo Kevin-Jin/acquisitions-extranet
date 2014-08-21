@@ -8,7 +8,7 @@ import com.jetdrone.vertx.yoke.middleware.Logger;
 import com.jetdrone.vertx.yoke.middleware.Router;
 
 public class WebRouter extends Verticle {
-	private static final int PORT = 8080;
+	private static final int PORT = 9000;
 
 	@Override
 	public void start() {
@@ -20,7 +20,21 @@ public class WebRouter extends Verticle {
 		yoke.use(new Logger());
 		yoke.use(new ErrorHandler(true));
 		yoke.use("/assets", new AssetHandler(vertx, container, instanceId, "./www/assets", "./compiled/assets"));
-		yoke.use(new Router().get("/", c::index));
+		yoke.use(new Router()
+			.get("/", c::index)
+			.get("/buyer/?", c::buyer)
+			.get("/buyer/login", c::buyerLogin)
+			.get("/buyer/register", c::buyerRegister)
+			.all("/buyer/listing", c::buyerListing)
+			.get("/buyer/details", c::buyerDetails)
+			.get("/seller/?", c::seller)
+			.get("/seller/login", c::sellerLogin)
+			.get("/seller/register", c::sellerRegister)
+			.all("/seller/listing", c::sellerListing)
+			.get("/seller/details", c::sellerDetails)
+			.get("/banks/?", c::banks)
+			.all("/banks/listing", c::banksListing)
+		);
 		yoke.listen(PORT, "0.0.0.0");
 	}
 }

@@ -1,0 +1,46 @@
+/*
+	Mobile Styles
+ */
+
+@media(max-width: 879px) {
+	#scrobble-filter {
+		display: inline-block;
+	}
+
+	#scrobble-filter a, #scrobble-filter a:hover {
+		color: #fff;
+	}
+
+	#stream {
+		overflow-y: hidden;
+		height: 100%;
+		width: 200%;
+	}
+
+	#popular-local, #popular-social, .post-contents {
+		margin: 0px;
+	}
+
+	#popular-local, #popular-social {
+		width: 50%;
+		height: 100%;
+		overflow-y: scroll;
+		transition: 0.3s all;
+	}
+
+	.post-wrap {
+		width: 90%;
+		position: relative !important;
+		top: 0px !important;
+		left: 0px !important;
+		margin: 30px auto;
+	}
+
+	.shifted {
+		left: -50%;
+	}
+
+	#cover {
+		display: none;
+	}
+}

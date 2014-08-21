@@ -1,0 +1,101 @@
+#cover {
+	position: relative;
+	background: #17ae41;
+	color: #fff;
+	transition: 0.4s all;
+	z-index: 90002;
+	min-height: 100%;
+	top: -100%;
+}
+
+#cover.cover-visible {
+	top: 0px;
+}
+
+#cover-wrap {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 10%;
+}
+
+#cover h1 {
+	font-weight: 400;
+	font-size: 52px;
+	margin: 0;
+	padding-bottom: 31px;
+}
+
+#cover h1 span {
+	height: 67px;
+	overflow: hidden;
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+	position: relative;
+	top: 17px;
+}
+
+#cover ul {
+	padding: 0px;
+	margin: 0px;
+	position: relative;
+	top: 0px;
+}
+
+#cover ul li {
+	list-style: none;
+	height: 52px;
+	margin-top: 22px;
+}
+
+#cover p {
+	font-size: 16px;
+	line-height: 32px;
+}
+
+.cover-contents {
+	display: table-cell;
+	width: 50%;
+}
+
+#cover-left {
+	padding-right: 20px;
+}
+
+#cover-video {
+	height: 0px;
+	position: relative;
+}
+
+#cover-video iframe, #cover-video object, #cover-video embed {
+	position: absolute;
+}
+
+#cover .button {
+	background: #109836;
+	border: none !important;
+	font-size: 16px;
+	border-radius: 3px;
+}
+
+#cover .button:hover {
+	background: #0c882e;
+}
+
+#cover-register {
+	display: inline-block;
+	padding-right: 20px;
+	border-right: 1px solid #22d554;
+}
+
+#cover a {
+	color: #fff !important;
+}
+
+#cover a:hover {
+	border-bottom: 1px dotted #fff;
+}
+
+#preview-stream {
+	padding-left: 20px;
+}

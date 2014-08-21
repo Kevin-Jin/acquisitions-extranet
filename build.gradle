@@ -58,7 +58,9 @@ dependencies {
   compile "com.jetdrone:mod-bson-io:2.0.0"
   compile "io.vertx:mod-mysql-postgresql:0.3.0-SNAPSHOT"
   compile "io.vertx:mod-mailer:2.1.0-SNAPSHOT"
-  compile "com.jetdrone:yoke:2.0.1-SNAPSHOT"
+  compile "com.jetdrone:yoke:2.0.5-SNAPSHOT"
+  compile "com.englishtown:vertx-mod-hk2:1.8.0-SNAPSHOT"
+  compile "com.englishtown:vertx-mod-elasticsearch:1.2.0"
   compile "com.google.javascript:closure-compiler:v20140508"
   compile "com.google.template:soy:2012-12-21"
   // TODO: benchmark lesscss-java against Asual's lesscss-engine

@@ -1,0 +1,122 @@
+/*
+	Dialog Styles
+*/
+
+.dialog, .dialog-overlay {
+	position: fixed;
+	top: -100%;
+	opacity: 0.0;
+}
+
+.dialog {
+	transition: 0.4s top, 0.4s opacity;
+	top: -100%;
+	z-index: 90001;
+	border: 1px solid #dfdfdf;
+	box-shadow: 0px 0px 5px #e5e5e5;
+	padding: 35px 37px 42px;
+	display: inline-block;
+	background: #fff;
+	margin-top: -1px;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	width: 860px;
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+.dialog-overlay {
+	transition: 0.4s all;
+	background: rgba(255, 255, 255, 0.5);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7FFFFFFF, endColorstr=#7FFFFFFF);
+	cursor: pointer;
+	z-index: 90000;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.dialog.visible, .dialog-overlay.visible {
+	opacity: 1.0;
+	top: 0px;
+}
+
+.dialog .header {
+	font-size: 24px;
+	color: #17ae41;
+	font-weight: 300;
+	margin-bottom: 20px;
+}
+
+.dialog-close {
+	position: absolute;
+	top: 4px;
+	right: 7px;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	color: #000;
+}
+
+.dialog form input {
+	width: auto;
+}
+
+.dialog form .split span {
+	display: inline;
+}
+
+.promosharefriends {
+	border: 1px solid #ccc;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 0px;
+	padding: 0px;
+}
+
+.promosharefriends li {
+	display: block;
+	padding: 5px 8px;
+	position: relative;
+	height: 63px;
+}
+
+.promosharefriends label {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 53px;
+	margin: 0px !important;
+	padding: 10px;
+}
+
+.promosharefriends label:hover {
+	background: #eee;
+}
+
+.promosharefriends label img, .promosharefriends label span {
+	display: inline-block;
+}
+
+.promosharefriends img {
+	position: relative;
+	top: 3px;
+}
+
+.promosharefriends label span {
+	position: relative;
+	top: -17px;
+	left: 5px;
+}
+
+.promosharefriends input {
+	display: none;
+}
+
+.promosharefriends input:checked + label {
+	background: #17ae41;
+	color: #fff;
+}

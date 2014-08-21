@@ -1,0 +1,134 @@
+/*
+	Navigation Icons
+ */
+
+.locationdesc:before {
+	position: absolute;
+	top: 11px;
+	left: 20px;
+	width: 11px;
+	height: 15px;
+	content: '';
+	display: block;
+	background: url('../images/location_icon.png');
+}
+
+.nav-stream:before {
+	position: absolute;
+	top: 11px;
+	left: 16px;
+	width: 16px;
+	height: 15px;
+	content: '';
+	display: block;
+	background: url('../images/stream_icon.png');
+}
+
+.nav-stream:hover:before {
+	background: url('../images/stream_icon_hover.png');
+}
+
+.nav-leaderboard:before {
+	position: absolute;
+	top: 11px;
+	left: 16px;
+	width: 14px;
+	height: 17px;
+	content: '';
+	display: block;
+	background: url('../images/leaderboard_icon.png');
+}
+
+.nav-leaderboard:hover:before {
+	background: url('../images/leaderboard_icon_hover.png');
+}
+
+.nav-profile:before {
+	position: absolute;
+	top: 12px;
+	left: 16px;
+	width: 15px;
+	height: 14px;
+	content: '';
+	display: block;
+	background: url('../images/profile_icon.png');
+}
+
+.nav-profile:hover:before {
+	background: url('../images/profile_icon_hover.png');
+}
+
+.nav-shares:before {
+	position: absolute;
+	top: 12px;
+	left: 16px;
+	width: 15px;
+	height: 14px;
+	content: '';
+	display: block;
+	background: url('../images/profile_icon.png');
+}
+
+.nav-shares:hover:before {
+	background: url('../images/profile_icon_hover.png');
+}
+
+.nav-logout:before {
+	position: absolute;
+	top: 11px;
+	left: 16px;
+	width: 13px;
+	height: 16px;
+	content: '';
+	display: block;
+	background: url('../images/logout_icon.png');
+}
+
+.nav-logout:hover:before {
+	background: url('../images/logout_icon_hover.png');
+}
+
+.nav-search:before {
+	position: absolute;
+	top: 11px;
+	left: 16px;
+	width: 18px;
+	height: 18px;
+	content: '';
+	display: block;
+	background: url('../images/search_icon.png');
+}
+
+.nav-search:hover:before {
+	background: url('../images/search_icon_hover.png');
+}
+
+.nav-login:before {
+	position: absolute;
+	top: 9px;
+	left: 16px;
+	width: 18px;
+	height: 18px;
+	content: '';
+	display: block;
+	background: url('../images/login_icon.png');
+}
+
+.nav-login:hover:before {
+	background: url('../images/login_icon_hover.png');
+}
+
+.nav-register:before {
+	position: absolute;
+	top: 10px;
+	left: 18px;
+	width: 18px;
+	height: 18px;
+	content: '';
+	display: block;
+	background: url('../images/register_icon.png');
+}
+
+.nav-register:hover:before {
+	background: url('../images/register_icon_hover.png');
+}

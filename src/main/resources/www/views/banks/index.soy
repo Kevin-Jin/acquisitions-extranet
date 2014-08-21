@@ -1,0 +1,35 @@
+{namespace com.spoutouts.acqnet.banks}
+
+/**
+ * @param pagename The title.
+ */
+{template .index autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<h3>Login with your secure credentials.</h3>
+			<div class="article" style="text-align: left">
+				<form method="post" action="{ ROOT_DIR }/banks/listing">
+					<span style="display: inline-block; width: 50%; padding-right: 10px; box-sizing: border-box">
+						<label>Email Address</label>
+						<input type="email" required />
+					</span><span style="display: inline-block; width: 50%; padding-left: 10px; box-sizing: border-box">
+						<label>Password</label>
+						<input type="password" required />
+					</span>
+					<div class="split">
+						<span>
+							<input type="submit" value="Login" />
+						</span>
+						<span>
+							<a href="forgotpassword.html">Forgot your password?</a>
+						</span>
+					</div>
+				</form>
+			</div>
+			<h3>Interested in doing business with us?</h3>
+			<span>Contact client relations at <a href="#">client@acqnet.com</a> and we'll get you started.</span>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

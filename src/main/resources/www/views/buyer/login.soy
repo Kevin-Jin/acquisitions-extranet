@@ -1,0 +1,45 @@
+{namespace com.spoutouts.acqnet.buyer}
+
+/**
+ * @param pagename The title.
+ */
+{template .login autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<div class="header">
+				<h2>Returning user?</h2>
+			</div>
+			<div class="article" style="text-align: left">
+				<form method="post" action="{ ROOT_DIR }/buyer/listing">
+					<span style="display: inline-block; width: 50%; padding-right: 10px; box-sizing: border-box">
+						<label>Email Address</label>
+						<input type="email" required />
+					</span><span style="display: inline-block; width: 50%; padding-left: 10px; box-sizing: border-box">
+						<label>Password</label>
+						<input type="password" required />
+					</span>
+					<div class="split">
+						<span>
+							<input type="submit" value="Login" />
+						</span>
+						<span>
+							<a href="forgotpassword.html">Forgot your password?</a>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="plate">
+			<div class="header" style="text-align: right">
+				<h2>New user?</h2>
+			</div>
+			<div class="article">
+				<p style="overflow-y: scroll; background: #f5f5f5; border: 1px solid gray; margin-top: 5px; padding: 10px">Insert legalese here! E.g.<br>You may not view the full details of  companies you are interested in until you submit a non-refundable deposit.<br>You must prove your financial holdings before submitting any deposits.</p>
+				<div><input type="checkbox" id="accept"><label for="accept" style="vertical-align:middle">I agree to these conditions.</label></div>
+				<input type="submit" value="Next" style="margin-top: 30px" />
+			</div>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

@@ -1,0 +1,72 @@
+{namespace com.spoutouts.acqnet.seller}
+
+/**
+ * @param pagename The title.
+ */
+{template .register autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param stylesheets kind="html"}{literal}
+	<style>
+	.form-field {
+		clear: both;
+	    display: inline-block;
+	    position: relative;
+	}
+
+	.form-field.full {
+		display: block;
+	}
+
+	.form-field label {
+		display: inline-block;
+		width: 80px;
+		font-weight: bold;
+	}
+
+	.form-field .single-line {
+	     display: inline-block;
+	     width: 300px;
+	     padding: 0;
+	     width: auto;
+	     margin: 0;
+	     margin-right: 50px;
+	}
+	</style>
+{/literal}{/param}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate"><form>
+			<h1>Financial Information</h1>
+			<span style="display: block; margin: 10px 0">Provide the bare minimum needed to get listed. You will be able to choose what information gets displayed to who on the next page.</span>
+			<div style="text-align: left">
+				<div class="form-field"><span style="line-height: 32px"><label for="revenue">Revenue (*):</label> <input type="text" class="single-line" id="revenue"></span></div>
+				<div class="form-field"><span style="line-height: 32px"><label for="expenses">Expenses (*):</label> <input type="text" class="single-line" id="expenses"></span></div>
+				<div class="form-field full"><label for="description">Description (*):</label> <textarea id="description"></textarea></div>
+				<div class="form-field full"><label for="riskfactors">Risk factors:</label> <textarea id="riskfactors"></textarea></div>
+			</div>
+			<h1>Privacy</h1>
+			<div style="text-align: left">
+				<span style="line-height: 32px"><input type="checkbox" id="pro" /><label for="pro">Make this listing visible to buyers represented by financial institution professionals</label></span>
+				<span style="line-height: 32px"><input type="checkbox" id="min" /><label for="min">Make this listing visible to any individual with a minimum income of</label>{sp}<label for="minincome">$</label>{sp}<input type="text" id="minincome" style="padding: 0; width: auto; margin: 0" /></span>
+				<span style="line-height: 32px">Recommended information hiding settings:</span>
+				<span style="line-height: 32px; margin-left: 20px"><input type="checkbox" id="priv1" /><label for="priv1">Minimize visibility</label></span>
+				<span style="line-height: 32px; margin-left: 20px"><input type="checkbox" id="priv2" /><label for="priv2">Maximize visibility</label></span>
+				<span style="line-height: 32px; margin-left: 20px"><a href="#">Tweak details</a></span>
+				<span style="line-height: 32px; margin-left: 20px">Disclaimer: information released with respect to these settings may allow your company to be identified by any buyer. AcqNet holds no responsibility for damages directly or indirectly caused by the release of confidential information. Choose your settings carefully.</span>
+			</div>
+			<h1>Contact options</h1>
+			<span style="display: block; margin: 10px 0">Customize the confidentiality of your communication channels.</span>
+			<div style="text-align: left">
+				<span style="line-height: 32px"><label for="num">Phone number:</label> <input type="text" id="num" style="padding: 0; width: auto; margin: 0"></span>
+				<span style="line-height: 32px; margin-left: 20px"><input type="checkbox" id="pubnum" /><label for="pubnum">Make this public so that anyone viewing the listing can call directly</label></span>
+				<span style="line-height: 32px; margin-left: 20px"><input type="checkbox" id="smsnum" /><label for="smsnum">Receive SMS notifications on this number every time you are sent a message on AcqNet</label></span>
+				<span style="line-height: 32px"><label for="email">Email address:</label> <input type="text" id="email" style="padding: 0; width: auto; margin: 0" /></span>
+				<span style="line-height: 32px; margin-left: 20px"><input type="checkbox" id="smsemail"><label for="smsemail">Receive emails on this address every time you are sent a message on AcqNet</label></span>
+			</div>
+			<h1>Shoutouts</h1>
+			<span style="display: block; margin: 10px 0">Grab attention. Any companies that identify themselves with or search for one of these tags will see your listing pomped up in their search results.</span>
+			<div style="text-align: left">
+				<span style="line-height: 32px"><label for="shoutout">Tags:</label> <input type="text" id="shoutout" style="padding: 0; width: auto"></span>
+			</div>
+		</form></div>
+	</div></div>
+{/param}{/call}
+{/template}

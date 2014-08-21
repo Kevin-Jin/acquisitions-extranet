@@ -1,0 +1,173 @@
+/*
+	Sidebar Styles
+ */
+#topbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	font-weight: 300;
+	text-transform: uppercase;
+	width: 100%;
+	text-align: left;
+}
+
+#search {
+	height: 58px;
+	padding: 9px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	background: #f0f0f0;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 220px;
+	text-align: right;
+}
+
+#search input, a.button {
+	box-sizing: border-box;
+	padding: 10px 12px;
+	line-height: 18px;
+	border: 1px solid #dadada;
+	margin: 0 1px;
+}
+
+#search input:focus {
+	border: 1px solid #c8c8c8;
+}
+
+#searchbartoggle {
+	display: none;
+}
+
+#searchicon {
+	background: url('../images/toggle_search_button.png') no-repeat center;
+	display: none;
+	width: 26px;
+	height: 58px;
+
+	top: 0;
+	z-index: 4;
+}
+
+#searchbartoggle~.offsetable {
+	right: 0;
+}
+
+#searchbartoggle~.offsetable.unenhanced {
+	-webkit-transition: all 0.1s ease;
+	transition: all 0.1s ease;
+}
+
+#default {
+	background: #17ae41;
+}
+
+#logo, #logo:hover {
+	font-size: 26px;
+	padding: 18px 0px 22px;
+	width: 220px;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+}
+
+#sidebar {
+	position: fixed;
+	top: 58px;
+	left: 0px;
+	bottom: 0px;
+	width: 220px;
+	z-index: 1;
+	padding-bottom: 25px;
+	overflow-x: hidden;
+}
+
+.nav {
+	overflow-y: auto;
+	height: 100%;
+}
+
+#sidebar {
+	background: #2e2e2e;
+}
+
+#location {
+	background: #11a039;
+	color: #fff;
+}
+
+.locationdesc:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.sidebutton {
+	display: block;
+	color: #b3b3b3;
+}
+
+.sidebutton span {
+	display: block;
+	position: relative;
+	padding: 10px 40px 12px;
+}
+
+.sidebutton:hover {
+	background: #404040;
+	color: #fff;
+}
+
+#sidebartoggle~.offsetable {
+	left: 0;
+}
+
+#sidebartoggle~.offsetable.unenhanced {
+	-webkit-transition: left 0.1s ease;
+	transition: left 0.1s ease;
+}
+
+#sidebartoggle {
+	display: none;
+}
+
+.sidebartogglebg {
+	width: 26px;
+	height: 58px;
+	background: #17ae41;
+	z-index: 1;
+	position: fixed;
+}
+
+.showsidebaricon {
+	display: none;
+	width: 26px;
+	height: 58px;
+	background: url('../images/toggle_sidebar_button.png') no-repeat center;
+}
+
+.showsidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+
+	margin-left: -10px;
+}
+
+#copyright {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	box-sizing: border-box;
+	line-height: 25px;
+	padding: 0;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 75%;
+	color: #fff;
+}

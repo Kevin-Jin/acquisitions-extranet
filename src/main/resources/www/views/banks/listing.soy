@@ -1,0 +1,17 @@
+{namespace com.spoutouts.acqnet.banks}
+
+/**
+ * @param pagename The title.
+ */
+{template .listing autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<h3>Broker Tasks</h3>
+		</div>
+		<div class="plate">
+			<h3>Legal Tasks</h3>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

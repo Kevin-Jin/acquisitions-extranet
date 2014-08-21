@@ -1,0 +1,340 @@
+/*
+	General Styles
+ */
+
+html, body {
+	background: #fff;
+	color: #2e2e2e;
+	font-family: 'Open Sans';
+	font-size: 12px;
+	line-height: 18px;
+	height: 100%;
+	margin: 0;
+}
+
+html {
+	overflow-y: scroll;
+}
+
+body.disablescroll #main {
+	position: fixed;
+}
+
+.fa {
+	font-size: 14px;
+	position: relative;
+	top: 1px;
+}
+
+a {
+	color: #17ae41;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #11a039;
+}
+
+h2 {
+	font-size: 24px;
+	margin: 0px;
+	padding: 0px;
+	text-transform: uppercase;
+	font-weight: 400;
+}
+
+p {
+	text-align: justify;
+	margin: 0px 0px 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+h2, .green {
+	color: #17ae41
+}
+
+h3 {
+	margin: 16px 0;
+}
+
+.two-column {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.two-column + .two-column {
+	padding-left: 24px;
+}
+
+#main {
+	position: absolute;
+	top: 58px;
+	right: 0px;
+	left: 0px;
+	bottom: 0;
+	margin-left: 220px;
+	z-index: 0;
+}
+
+#page {
+	background: #e7e7e7;
+	position: relative;
+	box-sizing: border-box;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+.centerline {
+	position: relative;
+	margin: 0 auto;
+	max-width: 760px;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+input[type=text], input[type=email], input[type=password], textarea, select, fieldset {
+	padding: 12px 14px 14px;
+	border: 1px solid #c8c8c8;
+	display: inline-block;
+	outline: none;
+	margin-left: 0;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+input[type=file] {
+	display: inline-block;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus, select:focus {
+	border: 1px solid #17ae41;
+}
+
+a.button {
+	display: inline-block;
+}
+
+input[type=button], input[type=submit], button, a.button {
+	background: #16aa3f;
+	border: 1px solid #0e9233;
+	color: #fff;
+	padding: 12px 14px 14px;
+}
+
+input[type=button]:hover, input[type=submit]:hover, button:hover, a.button:hover {
+	border: 1px solid #097327;
+	background: #14a13b;
+}
+
+input[type=checkbox], .dialog label {
+	vertical-align: middle;
+} 
+
+input[type=checkbox] + label {
+	margin-left: 2px;
+}
+
+textarea, fieldset {
+	width: 100%;
+	min-height: 150px;
+	box-sizing: border-box;
+}
+
+fieldset {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 20px;
+	min-height: 0px;
+}
+
+legend {
+	font-weight: 700;
+	margin-bottom: 16px;
+	font-size: 1.17em;
+}
+
+label {
+	color: #939393;
+}
+
+form {
+	margin-top: 20px;
+}
+
+form span {
+	display: block;
+}
+
+form span label {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+form .split span {
+	display: inline-block;
+}
+
+form input[type=text], form input[type=email], form input[type=password], form textarea, form select {
+	width: 100%;
+}
+
+form .combobox {
+	width: 100%;
+	position: relative;
+}
+
+form .combobox input {
+	width: auto;
+}
+
+form .combobox .left {
+	float: left;
+	width: 33%;
+	margin-right: 0;
+}
+
+form .combobox .right {
+	float: right;
+	width: 65%;
+	margin-right: 0;
+}
+
+.split input {
+	display: inline-block;
+}
+
+.split span {
+	padding: 15px 10px 15px 0px;
+}
+
+.split span + span {
+	padding-right: 0px;
+	padding-left: 10px;
+	border-left: 1px solid #dadada;
+}
+
+.restriction, #content {
+	padding: 30px 0px;
+	max-width: 700px;
+	margin: 0px auto;
+}
+
+.restriction {
+	padding: 15px 0px;
+}
+
+.hidden {
+	display: none;
+}
+
+.smart-form label, .paddedlabel {
+	display: inline-block;
+	min-width: 150px;
+}
+
+form .smart-input, .paddedlink {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+form .smart-input input {
+	border-color: #fff;
+	padding: 0px;
+	width: 150px;
+	margin: 0px;
+	display: inline-block;
+}
+
+form .smart-input input:focus {
+	border-color: #fff;
+}
+
+.plate, input.plate {
+	margin: 10px 0;
+	border: 1px solid lightgray;
+	background: white;
+	padding: 20px;
+	text-align: right;
+}
+
+.slide {
+	margin-left: -30px;
+	margin-right: -30px;
+	overflow: hidden;
+	height: 300px;
+	position: relative;
+}
+
+.slide .fulloverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	color: black;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 10px 10px;
+	text-align: right;
+	overflow-y: auto;
+	border: solid 1px lightgray;
+}
+
+.slide .widecaption {
+	position: absolute;
+	line-height: 48px;
+	left: 0;
+	right: 0;
+	color: white;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 0 10px;
+}
+
+.tabs {
+	position: absolute;
+}
+
+.tabs label {
+	background: MediumSeaGreen;
+	color: white;
+	border: 1px solid lightgray;
+	border-top: none;
+	padding: 0 5px;
+	line-height: 26px;
+	display: inline-block;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#errors {
+	background: #ff6363;
+}
+
+#note {
+	background: #bbbbcc;
+}
+
+.error {
+	color: #fff;
+	display: block;
+}
+
+.space-top {
+	margin-top: 1em;
+}
+
+.bubble {
+	background: #11a039;
+	color: #fff;
+	font-size: 11px;
+	padding: 3px 5px;
+	border-radius: 3px;
+
+}

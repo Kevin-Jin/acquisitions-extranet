@@ -1,0 +1,28 @@
+{namespace com.spoutouts.acqnet.seller}
+
+/**
+ * @param pagename The title.
+ */
+{template .listing autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<a href="register" class="button">+Submit a new listing</a>
+		</div>
+		<div class="plate">
+			<h1>Active listings</h1>
+			<span style="display: block; margin: 10px 0">Track the popularity of your public listings among investors.</span>
+			<div class="slide">
+				<img src="http://lorempixel.com/820/300/">
+				<span class="widecaption" style="top: 0; font-weight: bold; font-size: 16pt">Spoutouts</span>
+				<span class="widecaption" style="bottom: 0; text-align: left; font-size: 8pt"><span style="font-weight: bold">11</span> people looked at your listing today. <span style="font-weight: bold">2</span> offers are pending your review. <span style="font-style: italic">Click to see more info.</span></span>
+			</div>
+		</div>
+		<div class="plate">
+			<h1>Weather report</h1>
+			<span style="display: block; margin: 10px 0">Now may be a good time to liquidate your other holdings.</span>
+			<span style="display: block; margin: 10px 0; text-align: left">The keyword "stuff" was searched 12 times today by buyers.</span>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

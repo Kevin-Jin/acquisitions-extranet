@@ -1,0 +1,155 @@
+{namespace com.spoutouts.acqnet.buyer}
+
+/**
+ * @param pagename The title.
+ */
+{template .details autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param stylesheets kind="html"}{literal}
+	<style>
+	/*.activities {
+		float: right;
+		right: 0;
+		top: 0;
+		width: 300px;
+		height: 200px;
+		background: black;
+	}
+
+	html, body {
+		overflow-x: scroll;
+	}
+
+	#page {
+		overflow: visible;
+	}*/
+
+	.attachment:before {
+		content: "\25bc ";
+	}
+
+	.attachment {
+		margin: 0 5px;
+		text-decoration: underline;
+	}
+
+	.slide {
+		display: none;
+	}
+
+	#togglecover, #togglefin, #togglesum {
+		display: none;
+	}
+
+	#togglecover:checked ~ .tabs label[for="togglecover"] {
+		background: white;
+		color: MediumSeaGreen;
+	}
+
+	#togglecover:checked ~ #slidecover {
+		display: block;
+	}
+
+	#togglefin:checked ~ .tabs label[for="togglefin"] {
+		background: white;
+		color: MediumSeaGreen;
+	}
+
+	#togglefin:checked ~ #slidefin {
+		display: block;
+	}
+
+	#togglesum:checked ~ .tabs label[for="togglesum"] {
+		background: white;
+		color: MediumSeaGreen;
+	}
+
+	#togglesum:checked ~ #slidesum {
+		display: block;
+	}
+
+.centerline { max-width: 100%; text-align: center; }
+.plate { width: 100%; max-width: 740px; margin: 10px auto; box-sizing: border-box; display: inline-block; vertical-align: top; }
+.utensil { max-width: 300px; }
+	</style>
+{/literal}{/param}{param layout kind="html"}
+	<div id="page" class="section" style="text-align: right">
+	<!--<div style="width: 1060px; height:1px; display: inline-block">
+		<div style="display:inline-block; top: 0; width: 100%; max-width: 760px; height: 200px; background: green"></div>
+		<div class="activities">Helo</div>
+	</div>-->
+	<div class="centerline">
+		<div class="plate">
+			<h1>Description</h1>
+			<span style="display: block; margin: 10px 0">Make an informed decision.</span>
+			<input type="radio" name="tabpage" id="togglecover" checked>
+			<input type="radio" name="tabpage" id="togglefin">
+			<input type="radio" name="tabpage" id="togglesum">
+			<div class="slide" id="slidecover">
+				<img src="http://lorempixel.com/820/300/">
+				<div class="fulloverlay">
+					<div style="float: left; text-align: left">
+						<span style="display: block">Industry: Sightseeing</span>
+						<span style="display: block">Location: New Jersey</span>
+					</div>
+					<div style="float: right">
+						<span style="display: block; font-weight: bold; font-size: 16pt">Hc Svnt Dracones</span>
+						<span style="display: block; font-style: italic; font-size: 10px">Represented by The Bank of Evil</span>
+					</div>
+					<div style="text-align: center">
+						<span style="display: block; font-size: 12pt; font-style: italic; font-weight: bold; color: gray">$100,000</span>
+					</div>
+					<div style="clear: both; padding-bottom: 10px"></div>
+					<div style="float: left; text-align: left; margin-right: 20px; margin-bottom: 20px">
+						<span style="display: block; font-weight: bold; font-size: 14px">2014 Snapshot</span>
+						<span style="display: block">Revenues: $500,000</span>
+						<span style="display: block">Expenses: $500,000</span>
+						<span style="display: block">Total assets: $500,000</span>
+						<span style="display: block">Total liabilities: $100,000</span>
+						<span style="display: block">Year founded: 1995</span>
+						<span style="display: block">Salaried employees: 5</span>
+					</div>
+					<div style="text-align: left">
+						<span style="display: block; font-weight: bold; font-size: 14px">Owner's statement</span>
+						<span style="display: block">2014 failed to meet expectations. Dragon sightings are now at an all time low. Willing to sell our specialized assets at a discount to those who can turn it around.</span>
+					</div>
+					<div style="position: relative; bottom: 0; font-weight: bold; text-align: center">
+						<a href="#" class="attachment">Attachment1.docx</a>{sp}
+						<a href="#" class="attachment">Attachment2.docx</a>{sp}
+						<a href="#" class="attachment">Attachment3.docx</a>{sp}
+						<a href="#" class="attachment">Attachment4.docx</a>{sp}
+						<a href="#" class="attachment">Attachment5.docx</a>{sp}
+						<a href="#" class="attachment">Attachment6.docx</a>{sp}
+						<a href="#" class="attachment">Attachment7.docx</a>{sp}
+						<a href="#" class="attachment">Attachment8.docx</a>{sp}
+					</div>
+				</div>
+			</div>
+			<div class="slide" id="slidefin">
+				<div class="fulloverlay">
+				<p>This is a restricted area. You must sign an NDA and submit a deposit to read more.</p>
+				<p>Allan please add charts</p>
+				</div>
+			</div>
+			<div class="slide" id="slidesum">
+				<div class="fulloverlay">
+				<p>Allan please add details</p>
+				</div>
+			</div>
+			<div class="tabs">
+				<label for="togglecover">Cover Page</label>
+				<label for="togglefin">Full Financials</label>
+				<label for="togglesum">Full Owner's Statement</label>
+			</div>
+		</div>
+		{sp}
+		<div class="plate utensil">
+			<h1>Activities</h1>
+			<span style="display: block; margin: 10px 0">Interested? Make an offer.</span>
+			<span style="display: block; margin: 10px 0; text-align: left"><span style="padding: 5px">$100,000</span><a href="#" class="button">Buy</a></span>
+			<span style="display: block; margin: 10px 0; text-align: left"><a href="#" class="button">Initiate conversation</a></span>
+			<span style="display: block; margin: 10px 0; text-align: left; position: relative"><span style="position: absolute; top: 12px; left: 5px">$</span><input type="text" /><a href="#" class="button">Bid</a></span>
+			<span style="display: block; margin: 10px 0; text-align: left"><a href="#" class="button">Initiate conversation</a></span>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

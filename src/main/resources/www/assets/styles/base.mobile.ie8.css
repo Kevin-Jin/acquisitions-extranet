@@ -1,0 +1,17 @@
+@media(max-width: 879px) {
+	/*
+	 * IE8 doesn't support :checked, so just expand sidebar on :hover instead.
+	 * Because we can't move .showsidebar through the CSS general sibling selector,
+	 * we hide .showsidebar when hovering over #sidebar as a workaround.
+	 * Won't be a problem for IE8, but on more modern browsers that support CSS
+	 * transition, this hack can be ugly when the sidebar collapses because the
+	 * icon shows up in its real location immediately when we unhover off #sidebar.
+	 */
+	.showsidebar.unenhanced:hover~.offsetable,#sidebar.unenhanced:hover,#sidebar.unenhanced:hover~.offsetable {
+		left: 200px;
+	}
+
+	#searchicon.unenhanced:hover,#searchicon.unenhanced:hover~.offsetable,#search.unenhanced:hover~.offsetable {
+		right: 100%;
+	}
+}

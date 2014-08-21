@@ -1,0 +1,175 @@
+{namespace com.spoutouts.acqnet.buyer}
+
+/**
+ * @param pagename The title.
+ */
+{template .listing autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param stylesheets kind="html"}{literal}
+	<style>
+	.propsnapshot {
+		display: inline-block;
+		box-sizing: border-box;
+		width: 50%;
+		text-align: left;
+		font-size: 14px;
+
+		border: 1px solid #f5f5f5;
+		background: #fdfdfd;
+	}
+
+	.propsnapshot img {
+		display: inline-block;
+		box-sizing: border-box;
+		width: 25%;
+		padding: 2px;
+		vertical-align: middle;
+	}
+
+	.propsnapshot .summary {
+		display: inline-block;
+		box-sizing: border-box;
+		padding: 5px;
+		vertical-align: middle;
+	}
+
+	.propsnapshot:hover {
+		background: MediumSeaGreen;
+		color: white;
+		border: 1px solid MediumSeaGreen;
+	}
+
+	.propsnapshot:hover img {
+		padding: 5px;
+	}
+
+	.viewmore {
+		font-size: 12px;
+		display: block;
+		text-align: center;
+		padding: 10px;
+		background: #f5f5f5;
+		border: solid 1px lightgray;
+	}
+
+	.viewmore:hover {
+		background: #e5e5e5;
+	}
+
+	.locked:before {
+		font-family: monospace;
+		font-size: 12pt;
+		color: gray;
+		margin: 0 2px;
+		content: '';
+		width: 12px;
+		height: 12px;
+		display: inline-block;
+		vertical-align: middle;
+		background: url('../assets/images/private.png');
+		background-size: 12px;
+	}
+
+	.unlocked:before {
+		font-family: monospace;
+		font-size: 12pt;
+		color: gray;
+		margin: 0 2px;
+		content: '';
+		width: 12px;
+		height: 12px;
+		display: inline-block;
+		vertical-align: middle;
+		background: url('../assets/images/public.png');
+		background-size: 12px;
+	}
+
+	.categories {
+		display: none;
+		position: absolute;
+		left: 10px;
+		right: 10px;
+		margin-top: -10px;
+	}
+
+	.dimmer {
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 100%;
+		background-color: #000;
+		background-color: rgba(0, 0, 0, 0.25);
+		transition: bottom 0.5s ease;
+	}
+
+	.search {
+		position: relative;
+	}
+
+	.categories, .search {
+		z-index: 2;
+	}
+
+	.search:focus ~ .categories,
+	.search:hover ~ .categories,
+	.categories:hover {
+		display: block;
+	}
+
+	.search:focus ~ .dimmer,
+	.search:hover ~ .dimmer,
+	.categories:hover ~ .dimmer {
+		bottom: 0;
+	}
+	</style>
+{/literal}{/param}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<input type="text" placeholder="Search for listings..." class="plate search" style="display: block; width: 100%">
+		<div class="plate categories">
+			<h1>Common categories</h1>
+			<span style="display: block; margin: 10px 0">Need a place to start?</span>
+			<div style="text-align: left; vertical-align: middle">
+			<div style="display: inline-block; vertical-align: top; padding: 5px">
+			<h3>Small business</h3>
+			<ul>
+			<li><a href="#">Restaurants</a></li>
+			<li><a href="#">Shops</a></li>
+			<li><a href="#">Photography</a></li>
+			<li><a href="#">Dance</a></li>
+			<li><a href="#">Martial Arts</a></li>
+			</ul>
+			</div>
+			<div style="display: inline-block; vertical-align: top; padding: 5px">
+			<h3>Enterprise</h3>
+			<ul>
+			<li><a href="#">Technology</a></li>
+			<li><a href="#">Finance</a></li>
+			</ul>
+			</div>
+			</div>
+		</div>
+		<div class="dimmer"></div>
+		<div class="plate">
+			<h1>At a glance</h1>
+			<span style="display: block; margin: 10px 0">Based on your previous searches, these properties may interest you.</span>
+			<span style="display: block; margin-left: -30px; margin-right: -30px; box-sizing: border-box; padding: 10px; background: #f5f5f5; border: solid 1px lightgray">Note: Most properties have identifying information hidden for privacy reasons. For such properties,<br />you must make a deposit and commit to the company based on its snapshot before you may view the full details.</span>
+			<div style="margin-left: -30px; margin-right: -30px; position: relative; font-size: 0">
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/1"><span class="summary"><span class="locked">#104534</span><br>Asking for: <strong>$1,000,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/2"><span class="summary"><span class="unlocked">Hc Svnt Dracones</span><br>Asking for: <strong>$100,000</strong><br />Revenues: <span style="color: black">$50</span>/yr<br />Expenses: <span style="color: red">$100</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/3"><span class="summary"><span class="locked">#108321</span><br>Asking for: <strong>$900,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/4"><span class="summary"><span class="locked">#064912</span><br>Asking for: <strong>$1,100,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/5"><span class="summary"><span class="locked">#122735</span><br>Asking for: <strong>$950,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/6"><span class="summary"><span class="locked">#163290</span><br>Asking for: <strong>$500,000</strong><br />Revenues: <span style="color: black">$300,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/7"><span class="summary"><span class="locked">#100701</span><br>Asking for: <strong>$1,000,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$200,000</span>/yr</span></a>
+				<a href="details" class="propsnapshot"><img src="http://lorempixel.com/205/205/sports/8"><span class="summary"><span class="locked">#028758</span><br>Asking for: <strong>$4,000,000</strong><br />Revenues: <span style="color: black">$500,000</span>/yr<br />Expenses: <span style="color: red">$100,000</span>/yr</span></a>
+				<a href="#" class="viewmore">View more</a>
+			</div>
+		</div>
+		<div class="plate">
+			<h1>Saved listings</h1>
+			<span style="display: block; margin: 10px 0">You bookmarked these listings to be viewed again at a later date.</span>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

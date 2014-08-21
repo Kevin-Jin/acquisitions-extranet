@@ -1,0 +1,25 @@
+{namespace com.spoutouts.acqnet.seller}
+
+/**
+ * @param pagename The title.
+ */
+{template .index autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<h1 style="text-transform:uppercase">Looking to exit? Take control.</h1>
+			<span style="display: block; margin: 10px 0"><span style="font-weight:bold">Get the upper hand in negotiations and choose the best offer.</span></span>
+			<span style="display: block; margin: 10px 0">Find buyers who will take good care of your company and also compensate you fairly.</span>
+			<span style="display: block; margin: 10px 0"><span style="font-weight:bold">Easier than through a bank, and cheaper too.</span></span>
+			<span style="display: block; margin: 10px 0"><span style="font-weight:bold">You</span> name a price point. <span style="font-weight:bold">You</span> choose the taker. <span style="font-weight:bold; font-style:italic">We</span> take care of the boring stuff. <!--<span style="font-weight:bold">You</span> take the profit. <span style="font-style:italic">That's it</span>.--></span>
+			<span style="display: block; margin: 10px 0">Check out our <a href="#">rate schedule</a>.</span>
+			<span style="display: block; margin: 10px 0"><span style="font-weight:bold">You're safe with us.</span></span>
+			<span style="display: block; margin: 10px 0">Confidential information will be released only when you approve the buyer.</span>
+			<span style="display: block; margin: 10px 0">Sensitive files and intellectual property are shared with only those whom you explicitly trust.</span>
+			<span style="display: block; margin: 10px 0">All web traffic and data centers are secured with military grade encryption.</span>
+			<h3>Communication simplified.</h3>
+			<a href="{ ROOT_DIR }/seller/login" class="button">Get matched today</a>
+		</div>
+	</div></div>
+{/param}{/call}
+{/template}

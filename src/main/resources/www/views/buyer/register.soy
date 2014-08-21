@@ -1,0 +1,18 @@
+{namespace com.spoutouts.acqnet.buyer}
+
+/**
+ * @param pagename The title.
+ */
+{template .register autoescape="strict" kind="html"}
+{call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate"><form>
+			<h1>Selective ears</h1>
+			<span style="display: block; margin: 10px 0">Those who seek your attention will be ranked higher in your search results. List specific industries you wish to target or your firm's name.</span>
+			<div style="text-align: left">
+				<span style="line-height: 32px"><label for="shoutout">Tags:</label> <input type="text" id="shoutout" style="padding: 0; width: auto"></span>
+			</div>
+		</form></div>
+	</div></div>
+{/param}{/call}
+{/template}

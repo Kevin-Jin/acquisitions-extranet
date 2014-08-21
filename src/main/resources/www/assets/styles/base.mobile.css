@@ -1,0 +1,137 @@
+/*
+	Mobile Styles
+ */
+
+@media(max-width: 879px) {
+	html, body {
+		position: relative;
+		overflow: hidden;
+	}
+
+	body.disablescroll #main {
+		position: absolute;
+	}
+
+	#topbar {
+		right: 0;
+		top: 0;
+		width: auto;
+		text-align: left;
+		left: 26px;
+		height: 58px;
+	}
+
+	#searchbartoggle.unenhanced:checked~.offsetable/*,#searchicon.unenhanced:active,#searchicon.unenhanced:active~.offsetable*/ {
+		right: 100%;
+	}
+
+	#searchicon {
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	#default {
+		position: absolute;
+		right: 0;
+		z-index: 2;
+		width: 100%;
+	}
+
+	#logo, #logo:hover {
+		position: relative;
+		left: 0;
+		width: auto;
+		display: inline-block;
+	}
+
+	#search {
+		position: absolute;
+		left: 0;
+		z-index: 1;
+	}
+
+	#sidebar {
+		margin-left: -220px;
+		top: 58px;
+	}
+
+	#sidebartoggle.unenhanced:checked~.offsetable/*,.showsidebar.unenhanced:active~.offsetable*/ {
+		left: 220px;
+	}
+
+	.showsidebaricon {
+		display: inline-block;
+	}
+
+	.nav {
+		position: relative;
+		left: 0;
+		transition: 0.3s all;
+		top: 0px;
+		bottom: 0px;
+		width: 220px;
+	}
+
+	.nav .mobile {
+		display: block !important;
+	}
+
+	body > .hidden {
+		display: block;
+	}
+
+	#main {
+		margin-left: 0px;
+		right: auto;
+		bottom: 0px;
+		width: 100%;
+	}
+
+	#page {
+		padding: 0;
+		height: 100%;
+		box-sizing: border-box;
+		overflow-y: scroll;
+	}
+
+	.restriction {
+		padding: 15px 30px;
+	}
+
+	#content {
+		padding: 30px;
+	}
+
+	.dialog {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		height: 100%;
+		left: 0px !important;
+		width: 100%;
+		margin: 0px !important;
+	}
+
+	.dialog .two-column {
+		padding: 0px;
+	}
+
+	.dialog img.decoration {
+		display: none;
+	}
+
+	.dialog .split span {
+		display: block;
+		padding: 0px 0px 20px;
+		border: none;
+	}
+
+	#promotionwizard textarea {
+		width: 100%;
+	}
+
+	p {
+		text-align: left;
+	}
+}

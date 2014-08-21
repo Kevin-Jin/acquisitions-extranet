@@ -2,6 +2,7 @@ package com.spoutouts.acqnet;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -155,6 +156,10 @@ public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 			}
 
 			builder = new SoyFileSet.Builder();
+			Map<String, String> globals = new HashMap<>();
+			globals.put("ROOT_DIR", "");
+			globals.put("ASSETS", "/assets");
+			builder.setCompileTimeGlobals(globals);
 			builder.setCssHandlingScheme(SoyGeneralOptions.CssHandlingScheme.BACKEND_SPECIFIC);
 			Set<String> processing = new HashSet<>();
 			processing.add(root);

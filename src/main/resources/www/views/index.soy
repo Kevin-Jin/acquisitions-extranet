@@ -1,17 +1,17 @@
 {namespace com.spoutouts.acqnet}
+
 /**
- * @param title The title.
+ * @param pagename The title.
  */
-{template .index}
-<!DOCTYPE html>
-<html>
-<head>
-<title>{$title}</title>
-<link rel="stylesheet" type="text/css" href="/assets/styles/common.css?min" />
-<script type="text/javascript" src="/assets/scripts/index.js?min"></script>
-</head>
-<body class="{css MyClass}">
-<p id="test">Hello World</p>
-</body>
-</html>
+{template .index autoescape="strict" kind="html"}
+{call .base data="all"}{param layout kind="html"}
+	<div id="page" class="section"><div class="centerline">
+		<div class="plate">
+			<h1 style="text-transform:uppercase">Welcome.</h1>
+			<a href="{ ROOT_DIR }/seller" class="button">Seller?</a>
+			<a href="{ ROOT_DIR }/buyer" class="button">Buyer?</a>
+			<a href="{ ROOT_DIR }/banks" class="button">Client?</a>
+		</div>
+	</div></div>
+{/param}{/call}
 {/template}
