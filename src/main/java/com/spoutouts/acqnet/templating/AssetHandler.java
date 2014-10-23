@@ -1,4 +1,4 @@
-package com.spoutouts.acqnet;
+package com.spoutouts.acqnet.templating;
 
 import java.io.File;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ import com.jetdrone.vertx.yoke.Middleware;
 import com.jetdrone.vertx.yoke.Yoke;
 import com.jetdrone.vertx.yoke.middleware.Static;
 import com.jetdrone.vertx.yoke.middleware.YokeRequest;
-import com.sun.istack.internal.NotNull;
 
 public class AssetHandler extends Middleware {
 	private static final int COMPILE_TIMEOUT = 3000;
@@ -38,7 +37,7 @@ public class AssetHandler extends Middleware {
 	}
 
 	@Override
-	public Middleware init(@NotNull final Yoke yoke, @NotNull final String mount) {
+	public Middleware init(final Yoke yoke, final String mount) {
 		regularAssets.init(yoke, mount);
 		compiledAssets.init(yoke, mount);
 		return super.init(yoke, mount);

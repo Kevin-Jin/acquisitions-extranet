@@ -1,4 +1,4 @@
-package com.spoutouts.acqnet;
+package com.spoutouts.acqnet.templating;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.spoutouts.acqnet;
+package com.spoutouts.acqnet.templating;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,14 +14,22 @@ import org.vertx.java.core.AsyncResult;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.file.FileProps;
+import org.vertx.java.core.json.JsonArray;
+import org.vertx.java.core.json.JsonElement;
+import org.vertx.java.core.json.JsonObject;
 import org.vertx.java.core.logging.Logger;
 
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.base.SoySyntaxException;
+import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyListData;
+import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.shared.SoyGeneralOptions;
 import com.google.template.soy.tofu.SoyTofu;
 import com.jetdrone.vertx.yoke.core.YokeAsyncResult;
 import com.jetdrone.vertx.yoke.engine.AbstractEngineSync;
+import com.jetdrone.vertx.yoke.store.json.ChangeAwareJsonArray;
+import com.jetdrone.vertx.yoke.store.json.ChangeAwareJsonObject;
 
 public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 	private static final String EXTENSION = ".soy";
@@ -68,9 +76,62 @@ public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 		return EXTENSION;
 	}
 
+	private static SoyData jsonToSoyData(JsonElement json) {
+		if (json.isArray()) {
+			SoyListData data = new SoyListData();
+			JsonArray jsonArr = json.asArray();
+			for (Object obj : jsonArr)
+				if (obj instanceof Boolean)
+					data.add(((Boolean) obj).booleanValue());
+				else if (obj instanceof Integer)
+					data.add(((Integer) obj).intValue());
+				else if (obj instanceof Long)
+					data.add(((Long) obj).longValue());
+				else if (obj instanceof Number)
+					data.add(((Number) obj).doubleValue());
+				else if (obj instanceof JsonElement)
+					data.add(jsonToSoyData((JsonObject) obj));
+				else if (obj instanceof String)
+					data.add((String) obj);
+			return data;
+		} else if (json.isObject()) {
+			SoyMapData data = new SoyMapData();
+			JsonObject jsonObj = json.asObject();
+			for (String field : jsonObj.getFieldNames()) {
+				Object obj = jsonObj.getField(field);
+				if (obj instanceof Boolean)
+					data.put(field, ((Boolean) obj).booleanValue());
+				else if (obj instanceof Integer)
+					data.put(field, ((Integer) obj).intValue());
+				else if (obj instanceof Long)
+					data.put(field, ((Long) obj).longValue());
+				else if (obj instanceof Number)
+					data.put(field, ((Number) obj).doubleValue());
+				else if (obj instanceof JsonElement)
+					data.put(field, jsonToSoyData((JsonObject) obj));
+				else if (obj instanceof String)
+					data.put(field, (String) obj);
+			}
+			return data;
+		} else {
+			return null;
+		}
+	}
+
 	private void renderInternal(String file, Map<String, Object> context, Handler<AsyncResult<Buffer>> handler, Boolean success) {
+		Map<String, Object> subs = new HashMap<>();
+		for (Map.Entry<String, Object> obj : context.entrySet()) {
+			if (obj.getValue() instanceof ChangeAwareJsonObject)
+				subs.put(obj.getKey(), jsonToSoyData(((ChangeAwareJsonObject) obj.getValue()).jsonObject()));
+			else if (obj.getValue() instanceof ChangeAwareJsonArray)
+				subs.put(obj.getKey(), jsonToSoyData(((ChangeAwareJsonArray) obj.getValue()).unsafeJsonArray()));
+			else if (obj.getValue() instanceof JsonElement)
+				subs.put(obj.getKey(), jsonToSoyData((JsonElement) obj.getValue()));
+			else
+				subs.put(obj.getKey(), obj.getValue());
+		}
 		if (success.booleanValue())
-			handler.handle(new YokeAsyncResult<>(new Buffer(tofu.newRenderer(file.substring(0, file.length() - EXTENSION.length())).setData(context).setCssRenamingMap(GoogleClosureState.INSTANCE.htmlCssMapper).render())));
+			handler.handle(new YokeAsyncResult<>(new Buffer(tofu.newRenderer(file.substring(0, file.length() - EXTENSION.length())).setData(subs).setCssRenamingMap(GoogleClosureState.INSTANCE.htmlCssMapper).render())));
 		else
 			handler.handle(new YokeAsyncResult<>(new Buffer()));
 	}
@@ -155,7 +216,7 @@ public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 				return;
 			}
 
-			builder = new SoyFileSet.Builder();
+			builder = SoyFileSet.builder();
 			Map<String, String> globals = new HashMap<>();
 			globals.put("ROOT_DIR", "");
 			globals.put("ASSETS", "/assets");

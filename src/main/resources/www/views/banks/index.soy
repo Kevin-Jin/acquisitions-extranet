@@ -1,23 +1,31 @@
 {namespace com.spoutouts.acqnet.banks}
 
 /**
- * @param pagename The title.
+ * Login page for banks.
  */
 {template .index autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
+{@param? error: string} /** the login error message */
+{@param? session: map<string, any>} /** the logged in user */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
 			<h3>Login with your secure credentials.</h3>
+			{if $error}{$error}{/if}
+			{if $session}hi{/if}
 			<div class="article" style="text-align: left">
-				<form method="post" action="{ ROOT_DIR }/banks/listing">
+				<form method="post" action="{ ROOT_DIR }/banks/user/bind">
 					<span style="display: inline-block; width: 50%; padding-right: 10px; box-sizing: border-box">
 						<label>Email Address</label>
-						<input type="email" required />
+						<input type="email" name="email" required />
 					</span><span style="display: inline-block; width: 50%; padding-left: 10px; box-sizing: border-box">
 						<label>Password</label>
-						<input type="password" required />
+						<input type="password" name="password" required />
 					</span>
 					<div class="split">
+						<span>
+							<input type="checkbox" name="persistent" value="1" id="persistent" /><label for="persistent">I am on a private computer</label>
+						</span>
 						<span>
 							<input type="submit" value="Login" />
 						</span>

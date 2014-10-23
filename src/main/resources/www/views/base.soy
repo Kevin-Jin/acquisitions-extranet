@@ -10,6 +10,7 @@
  * @param pagename (string) The title.
  * @param layout (html) The contents.
  * @param context (string) one of { seller, buyer, client }.
+ * @param user (int) The ID of the logged in user, or -1 if anonymous.
  * @param? stylesheets (html) Additional stylesheets.
  * @param? scripts (html) Additional scripts.
  * @param? overlay (html) Overlay
@@ -36,7 +37,6 @@
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script type="text/javascript" src="{ ASSETS }/scripts/jquery.expand.js"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
-		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.10/hammer.min.js"></script>
 		<script type="text/javascript" src="//cdn.jsdelivr.net/tipsy/1.0/javascripts/jquery.tipsy.js"></script>
 		<script type="text/javascript" src="{ ASSETS }/scripts/base.js"></script>
@@ -58,8 +58,12 @@
 					{case 'buyer'}<a href="{ ROOT_DIR }/seller" class="button">I want to sell</a>
 					{case 'seller'}<a href="{ ROOT_DIR }/buyer" class="button">I want to buy</a>
 				{/switch}
-				<input type="text" placeholder="Username" />
-				<input type="text" placeholder="Password" />
+				{if $user == -1}
+					<input type="text" placeholder="Username" />
+					<input type="text" placeholder="Password" />
+				{else}
+					<a href="{ ROOT_DIR }/user/unbind" class="button">Log off</a>
+				{/if}
 			</div>
 			<div id="default" class="aside offsetable unenhanced">
 				<a href="{ ROOT_DIR }/" id="logo">Acqnet</a>
@@ -87,12 +91,12 @@
 					</span>
 				</a>
 				<!-- Below should not be shown if Profile and Log Out are shown -->
-				<a href="{ ROOT_DIR }/buyer/login" class="sidebutton">
+				<a href="{ ROOT_DIR }/buyer/user/bind" class="sidebutton">
 					<span class="nav-login" >
 						Log In
 					</span>
 				</a>
-				<a href="{ ROOT_DIR }/buyer/register" class="sidebutton">
+				<a href="{ ROOT_DIR }/buyer/user/new" class="sidebutton">
 					<span class="nav-register" >
 						Register
 					</span>

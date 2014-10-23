@@ -1,16 +1,22 @@
 {namespace com.spoutouts.acqnet.banks}
 
 /**
- * @param pagename The title.
+ * Home page for clients.
  */
 {template .listing autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
-			<h3>Broker Tasks</h3>
+			<h1>Tasks</h1>
 		</div>
 		<div class="plate">
-			<h3>Legal Tasks</h3>
+			<h1 style="float: right">Your listings</h1>
+			<a href="register" class="button" style="float: left">+Submit a new listing</a>
+			<div class="clear"></div>
+		</div>
+		<div class="plate">
+			<h1>Your organization</h1>
 		</div>
 	</div></div>
 {/param}{/call}

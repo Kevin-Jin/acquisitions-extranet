@@ -42,6 +42,10 @@ install - install any jars produced to the local Maven repository (.m2)
 
  */
 
+repositories {
+  maven { url 'https://github.com/nathancomstock/maven-repo/raw/master/releases' }
+}
+
 dependencies {
   /*
   Add your module jar dependencies here
@@ -52,17 +56,20 @@ dependencies {
   */
 
   // If you're creating Groovy compiled verticles you may need the following dependencies
-  provided "org.codehaus.groovy:groovy-all:$groovyVersion"
-  provided "io.vertx:lang-groovy:$groovyLangModVersion@jar"
+  compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+  compile "io.vertx:lang-groovy:$groovyLangModVersion@jar"
 
   compile "com.jetdrone:mod-bson-io:2.0.0"
-  compile "io.vertx:mod-mysql-postgresql:0.3.0-SNAPSHOT"
+  compile "io.vertx:lang-scala_2.10:1.1.0-M1"
+  compile "io.vertx:mod-mysql-postgresql_2.10:0.4.0-SNAPSHOT"
   compile "io.vertx:mod-mailer:2.1.0-SNAPSHOT"
-  compile "com.jetdrone:yoke:2.0.5-SNAPSHOT"
+  compile "com.jetdrone:yoke:2.0.5"
   compile "com.englishtown:vertx-mod-hk2:1.8.0-SNAPSHOT"
   compile "com.englishtown:vertx-mod-elasticsearch:1.2.0"
+  compile "org.mindrot:jbcrypt:0.3m"
   compile "com.google.javascript:closure-compiler:v20140508"
-  compile "com.google.template:soy:2012-12-21"
+  //compile "com.google.template:soy:2012-12-21"
+  compile "nathancomstock.github:closure-templates:2014-04-22"
   // TODO: benchmark lesscss-java against Asual's lesscss-engine
   compile "org.lesscss:lesscss:1.7.0.1.1"
   // TODO: minify CSS with Closure Stylesheets, YUI Compressor, or CSSO (through Rhino)

@@ -1,3 +1,3 @@
 cd %~dp0
-gradlew.bat runMod
+gradlew.bat runMod -i --offline
 pause

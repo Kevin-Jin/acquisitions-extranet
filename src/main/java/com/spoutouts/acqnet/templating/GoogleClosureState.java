@@ -1,4 +1,4 @@
-package com.spoutouts.acqnet;
+package com.spoutouts.acqnet.templating;
 
 import com.google.common.base.Function;
 import com.google.javascript.jscomp.CssRenamingMap;
@@ -6,6 +6,8 @@ import com.google.template.soy.shared.SoyCssRenamingMap;
 
 //TODO: won't work until vertx 3.0 is released and there is more flexibility
 //with classloader isolation
+//TODO: read htmlCssMapper/jsCssMapper from closure-stylesheets output-renaming-map,
+//launch closure-stylesheets process with Runtime.getRuntime().exec()
 public final class GoogleClosureState {
 	private final Function<String, String> cssMapper;
 	public final SoyCssRenamingMap htmlCssMapper;

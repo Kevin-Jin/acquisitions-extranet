@@ -1,6 +1,6 @@
 {
   "main":"com.spoutouts.acqnet.Boot",
-  "includes": "com.jetdrone~yoke~2.0.5-SNAPSHOT,com.jetdrone~mod-bson-io~2.0.0,io.vertx~mod-mysql-postgresql~0.3.0-SNAPSHOT,io.vertx~mod-mailer~2.1.0-SNAPSHOT,com.englishtown~vertx-mod-hk2~1.8.0-SNAPSHOT,com.englishtown~vertx-mod-elasticsearch~1.2.0",
+  "includes": "com.jetdrone~yoke~2.0.5,com.jetdrone~mod-bson-io~2.0.0,io.vertx~lang-scala_2.10~1.1.0-M1,io.vertx~mod-mysql-postgresql_2.10~0.4.0-SNAPSHOT,io.vertx~mod-mailer~2.1.0-SNAPSHOT,com.englishtown~vertx-mod-hk2~1.8.0-SNAPSHOT,com.englishtown~vertx-mod-elasticsearch~1.2.0",
 
   "auto-redeploy": true,
   "preserve-cwd": false
