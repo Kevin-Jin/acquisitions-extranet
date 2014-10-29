@@ -5,6 +5,9 @@
  */
 {template .register autoescape="strict" kind="html"}
 {@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
+{@param csrf_token: string} /** the page title */
+{@param? error: string} /** the error message */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param stylesheets kind="html"}{literal}
 	<style>
 	.form-field {
@@ -43,7 +46,9 @@
 	</style>
 {/literal}{/param}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
-		<div class="plate"><form>
+		<div class="plate"><form method="{ $routes['GroupClientController$doBanksRegister'][0] }" action="{ $routes['GroupClientController$doBanksRegister'][1] }">
+			{if $error}{$error}{/if}
+			<input type="hidden" name="csrf_token" value="{$csrf_token}" />
 			<h1>Executive Summary</h1>
 			<div style="text-align: left">
 				<div class="form-field full"><label for="summary">Executive summary (*):</label> <textarea id="summary"></textarea></div>
@@ -76,6 +81,7 @@
 				<span style="line-height: 32px"><select><option>Expenses:</option></select><input type="text" style="padding: 0; width: auto; margin: 0"></span>
 				<a href="#">Add more</a>
 			</div>
+			<input type="submit" value="Next" />
 		</form></div>
 	</div></div>
 {/param}{/call}

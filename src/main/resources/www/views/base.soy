@@ -7,15 +7,16 @@
 {/template}
 
 /**
- * @param pagename (string) The title.
- * @param layout (html) The contents.
- * @param context (string) one of { seller, buyer, client }.
- * @param user (int) The ID of the logged in user, or -1 if anonymous.
- * @param? stylesheets (html) Additional stylesheets.
- * @param? scripts (html) Additional scripts.
- * @param? overlay (html) Overlay
  */
 {template .base autoescape="strict" kind="html"}
+{@param pagename: string} /** the title */
+{@param routes: map<string, list<string>>} /** web pages */
+{@param layout: html} /** the contents */
+{@param context: string} /** one of { seller, buyer, client } */
+{@param user: int} /** the ID of the logged in user, or -1 if anonymous } */
+{@param? stylesheets: html} /** additional stylesheets */
+{@param? scripts: html} /** additional scripts */
+{@param? overlay: html} /** overlay */
 <!DOCTYPE html>
 <html>
 	<head>
@@ -53,20 +54,20 @@
 			<input type="checkbox" id="searchbartoggle" class="unenhanced">
 			<label for="searchbartoggle" id="searchicon" class="offsetable unenhanced"></label>
 			<div id="search" class="aside unenhanced">
-				<a href="{ ROOT_DIR }/banks" style="margin: 0 10px">Client area</a>
+				<a href="{ $routes['GroupClientController$banks'][1] }" style="margin: 0 10px">Client area</a>
 				{switch $context}
-					{case 'buyer'}<a href="{ ROOT_DIR }/seller" class="button">I want to sell</a>
-					{case 'seller'}<a href="{ ROOT_DIR }/buyer" class="button">I want to buy</a>
+					{case 'buyer'}<a href="{ $routes['IndividualSellerController$seller'][1] }" class="button">I want to sell</a>
+					{case 'seller'}<a href="{ $routes['IndividualBuyerController$buyer'][1] }" class="button">I want to buy</a>
 				{/switch}
 				{if $user == -1}
 					<input type="text" placeholder="Username" />
 					<input type="text" placeholder="Password" />
 				{else}
-					<a href="{ ROOT_DIR }/user/unbind" class="button">Log off</a>
+					<a href="{ $routes['ReceptionController$logoff'][1] }" class="button">Log off</a>
 				{/if}
 			</div>
 			<div id="default" class="aside offsetable unenhanced">
-				<a href="{ ROOT_DIR }/" id="logo">Acqnet</a>
+				<a href="{ $routes['ReceptionController$index'][1] }" id="logo">Acqnet</a>
 				{call .tabs /}
 			</div>
 		</div>
@@ -75,7 +76,7 @@
 		<label for="sidebartoggle" class="showsidebaricon showsidebar unenhanced"><span style="display: block; height: 58px; width: 36px"></span></label>
 		<div id="sidebar" class="aside offsetable unenhanced">
 			<div class="nav">
-				<a href="{ ROOT_DIR }/buyer/listing" class="sidebutton">
+				<a href="{ $routes['IndividualBuyerController$buyerListing'][1] }" class="sidebutton">
 					<span class="nav-stream">
 						My Home
 					</span>
@@ -91,12 +92,12 @@
 					</span>
 				</a>
 				<!-- Below should not be shown if Profile and Log Out are shown -->
-				<a href="{ ROOT_DIR }/buyer/user/bind" class="sidebutton">
+				<a href="{ $routes['IndividualBuyerController$buyerLogin'][1] }" class="sidebutton">
 					<span class="nav-login" >
 						Log In
 					</span>
 				</a>
-				<a href="{ ROOT_DIR }/buyer/user/new" class="sidebutton">
+				<a href="{ $routes['IndividualBuyerController$buyerRegister'][1] }" class="sidebutton">
 					<span class="nav-register" >
 						Register
 					</span>

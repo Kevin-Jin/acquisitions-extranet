@@ -30,6 +30,7 @@ import com.jetdrone.vertx.yoke.core.YokeAsyncResult;
 import com.jetdrone.vertx.yoke.engine.AbstractEngineSync;
 import com.jetdrone.vertx.yoke.store.json.ChangeAwareJsonArray;
 import com.jetdrone.vertx.yoke.store.json.ChangeAwareJsonObject;
+import com.spoutouts.acqnet.WebRouter;
 
 public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 	private static final String EXTENSION = ".soy";
@@ -130,6 +131,7 @@ public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 			else
 				subs.put(obj.getKey(), obj.getValue());
 		}
+		subs.put("routes", WebRouter.Routes.forSoy);
 		if (success.booleanValue())
 			handler.handle(new YokeAsyncResult<>(new Buffer(tofu.newRenderer(file.substring(0, file.length() - EXTENSION.length())).setData(subs).setCssRenamingMap(GoogleClosureState.INSTANCE.htmlCssMapper).render())));
 		else
@@ -218,7 +220,7 @@ public class ClosureTemplateEngine extends AbstractEngineSync<Void> {
 
 			builder = SoyFileSet.builder();
 			Map<String, String> globals = new HashMap<>();
-			globals.put("ROOT_DIR", "");
+			globals.put("ROOT_DIR", WebRouter.Routes.WEB_ROOT);
 			globals.put("ASSETS", "/assets");
 			builder.setCompileTimeGlobals(globals);
 			builder.setCssHandlingScheme(SoyGeneralOptions.CssHandlingScheme.BACKEND_SPECIFIC);

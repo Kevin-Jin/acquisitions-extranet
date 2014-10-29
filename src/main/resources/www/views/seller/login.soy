@@ -1,9 +1,9 @@
 {namespace com.spoutouts.acqnet.seller}
 
 /**
- * @param pagename The title.
  */
 {template .login autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">

@@ -5,6 +5,7 @@
  */
 {template .index autoescape="strict" kind="html"}
 {@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
 {@param? error: string} /** the login error message */
 {@param? session: map<string, any>} /** the logged in user */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
@@ -14,7 +15,7 @@
 			{if $error}{$error}{/if}
 			{if $session}hi{/if}
 			<div class="article" style="text-align: left">
-				<form method="post" action="{ ROOT_DIR }/banks/user/bind">
+				<form method="{ $routes['GroupClientController$doBanksLogin'][0] }" action="{ $routes['GroupClientController$doBanksLogin'][1] }">
 					<span style="display: inline-block; width: 50%; padding-right: 10px; box-sizing: border-box">
 						<label>Email Address</label>
 						<input type="email" name="email" required />

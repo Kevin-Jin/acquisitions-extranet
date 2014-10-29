@@ -5,12 +5,13 @@
  */
 {template .index autoescape="strict" kind="html"}
 {@param pagename: string} /** the page title */
-{call .base data="all"}{param layout kind="html"}
+{@param routes: map<string, list<string>>} /** web pages */
+{call .base data="all"}{param context: 'client' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
 			<h1 style="text-transform:uppercase">Acquisition-Extranet</h1>
 			<p>We make it easy for you to find the right fit for your clients.</p>
-			<a href="{ ROOT_DIR }/banks" class="button">Log in now</a>
+			<a href="{ $routes['GroupClientController$banks'][1] }" class="button">Log in now</a>
 		</div>
 	</div></div>
 {/param}{/call}

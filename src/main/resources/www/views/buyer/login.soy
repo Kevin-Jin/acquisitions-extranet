@@ -1,9 +1,10 @@
 {namespace com.spoutouts.acqnet.buyer}
 
 /**
- * @param pagename The title.
  */
 {template .login autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
@@ -11,7 +12,7 @@
 				<h2>Returning user?</h2>
 			</div>
 			<div class="article" style="text-align: left">
-				<form method="post" action="{ ROOT_DIR }/buyer/listing">
+				<form method="post" action="{ $routes['IndividualBuyerController$buyerListing'][1] }">
 					<span style="display: inline-block; width: 50%; padding-right: 10px; box-sizing: border-box">
 						<label>Email Address</label>
 						<input type="email" name="email" required />

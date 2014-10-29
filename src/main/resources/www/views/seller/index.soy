@@ -1,9 +1,10 @@
 {namespace com.spoutouts.acqnet.seller}
 
 /**
- * @param pagename The title.
  */
 {template .index autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
@@ -18,7 +19,7 @@
 			<span style="display: block; margin: 10px 0">Sensitive files and intellectual property are shared with only those whom you explicitly trust.</span>
 			<span style="display: block; margin: 10px 0">All web traffic and data centers are secured with military grade encryption.</span>
 			<h3>Communication simplified.</h3>
-			<a href="{ ROOT_DIR }/seller/user/bind" class="button">Get matched today</a>
+			<a href="{ $routes['IndividualSellerController$sellerLogin'][1] }" class="button">Get matched today</a>
 		</div>
 	</div></div>
 {/param}{/call}

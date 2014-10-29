@@ -17,8 +17,14 @@ import com.spoutouts.acqnet.Boot;
 
 public class UserAuth {
 	public static final int EBUS_TIMEOUT = 5000;
+	/**
+	 * Not a timeout in that it does not reset with active usage.
+	 * This is the maximum amount of time a session token will be valid for
+	 * before user is logged out or the persistent login token is revalidated.
+	 */
+	private static final long SESSION_LENGTH = 12 * 60 * 60 * 1000;
 
-	private static String sign(String str) {
+	public static String sign(String str) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA-1");
@@ -34,7 +40,7 @@ public class UserAuth {
 		}
 	}
 
-	private static boolean matchSign(String expectedSignature, String toSign) {
+	public static boolean matchSign(String expectedSignature, String toSign) {
 		if (expectedSignature == null || toSign == null)
 			return false;
 
@@ -63,12 +69,12 @@ public class UserAuth {
 	 * @param delimiter
 	 * @return
 	 */
-	private static String join(String delimiter, String... elements) {
+	private static String join(String delimiter, Object... elements) {
 		if (elements.length == 0)
 			return "";
 
 		if (elements.length == 1)
-			return elements[0];
+			return elements[0].toString();
 
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < elements.length - 1; i++)
@@ -122,7 +128,8 @@ public class UserAuth {
 			return;
 		}
 		long passwordIteration = -1; //TODO: when user changes password, update this value
-		if (Long.parseLong(cookie.substring(cookie.indexOf('~') + 1)) != passwordIteration) {
+		String[] cookieParams = cookie.split("~");
+		if (cookieParams.length != 3 || Long.parseLong(cookieParams[1]) != passwordIteration || Long.parseLong(cookieParams[2]) < System.currentTimeMillis()) {
 			doLogoff(vertx, container, request, handler);
 			return;
 		}
@@ -174,7 +181,7 @@ public class UserAuth {
 				return;
 			}
 			long passwordIteration = -1; //TODO: when user changes password, update this value
-			CookieUtil.setCookie(request, "auth_session", queryResp.right.getValue(0).toString() + '~' + passwordIteration);
+			CookieUtil.setCookie(request, "auth_session", join("~", queryResp.right.getValue(0), passwordIteration, Long.valueOf(System.currentTimeMillis() + SESSION_LENGTH)));
 			//set a new auth cookie so that if the old auth cookie sniffed and stolen, it will be invalid,
 			//minimizing the impact of sniffed cookies
 			deletePersistentLoginCookie(vertx, container, request, false, status -> {
@@ -260,7 +267,7 @@ public class UserAuth {
 							}
 							//empty string signals successful login
 							long passwordIteration = -1; //TODO: when user changes password, update this value
-							CookieUtil.setCookie(request, "auth_session", queryResp.right.getValue(0).toString() + '~' + passwordIteration);
+							CookieUtil.setCookie(request, "auth_session", join("~", queryResp.right.getValue(0), passwordIteration, Long.valueOf(System.currentTimeMillis() + 12 * 60 * 60 * 1000)));
 							handler.handle("");
 							break;
 					}
@@ -282,6 +289,15 @@ public class UserAuth {
 			handler.handle("");
 	}
 
+	/**
+	 * Changing the password will log off anyone logged into the account.
+	 * @param vertx
+	 * @param container
+	 * @param request
+	 * @param accountId
+	 * @param newPass
+	 * @param handler
+	 */
 	public static void changePassword(Vertx vertx, Container container, YokeRequest request, int accountId, char[] newPass, Handler<String> handler) {
 		//update passwordIteration to invalidate any remaining auth_session cookies for the account
 		//long passwordIteration = -1; //TODO: recalculate this

@@ -1,9 +1,9 @@
 {namespace com.spoutouts.acqnet.buyer}
 
 /**
- * @param pagename The title.
  */
 {template .details autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param stylesheets kind="html"}{literal}
 	<style>
 	/*.activities {

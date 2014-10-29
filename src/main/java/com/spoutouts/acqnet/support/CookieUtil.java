@@ -14,6 +14,9 @@ import com.jetdrone.vertx.yoke.security.SecretSecurity;
 
 public class CookieUtil {
 	public static final int COOKIE_EXPIRE_INTERVAL_IN_SECONDS = 60 * 60 * 24 * 15;
+	/**
+	 * Changing this value will log out anybody logged into the site.
+	 */
 	public static final String COOKIE_KEY = "xcv224536ufg";
 	public static final Mac COOKIE_SIGNER = new SecretSecurity(COOKIE_KEY).getMac("HmacSHA256");
 	private static final Map<YokeRequest, Map<String, YokeCookie>> newCookies = new WeakHashMap<>();

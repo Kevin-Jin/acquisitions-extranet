@@ -5,6 +5,7 @@
  */
 {template .listing autoescape="strict" kind="html"}
 {@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'client' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
@@ -12,7 +13,7 @@
 		</div>
 		<div class="plate">
 			<h1 style="float: right">Your listings</h1>
-			<a href="register" class="button" style="float: left">+Submit a new listing</a>
+			<a href="{ $routes['GroupClientController$banksRegister'][1] }" class="button" style="float: left">+Submit a new listing</a>
 			<div class="clear"></div>
 		</div>
 		<div class="plate">

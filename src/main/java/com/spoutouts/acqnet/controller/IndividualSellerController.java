@@ -38,7 +38,7 @@ public class IndividualSellerController {
 					UserAuth.createPersistentLoginCookie(vertx, container, req, v -> {
 						if ("".equals(v)) {
 							//persistent login succeeded, show the home page
-							req.response().redirect(WebRouter.SELLER_HOME);
+							req.response().redirect(WebRouter.Routes.IndividualSellerController$sellerListing.path());
 						} else {
 							//persistent login failed, show the login form again, with an error
 							req.put("error", result);
@@ -46,7 +46,7 @@ public class IndividualSellerController {
 						}
 					});
 				} else {
-					req.response().redirect(WebRouter.SELLER_HOME);
+					req.response().redirect(WebRouter.Routes.IndividualSellerController$sellerListing.path());
 				}
 			} else {
 				//login failed, show the login form again, with an error

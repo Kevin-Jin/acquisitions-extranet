@@ -1,9 +1,9 @@
 {namespace com.spoutouts.acqnet.seller}
 
 /**
- * @param pagename The title.
  */
 {template .register autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'seller' /}{param stylesheets kind="html"}{literal}
 	<style>
 	.form-field {

@@ -25,7 +25,7 @@ public class ReceptionController {
 		UserAuth.doLogoff(vertx, container, req, result -> {
 			if ("".equals(result)) {
 				//logoff succeeded
-				req.response().redirect(WebRouter.HOME);
+				req.response().redirect(WebRouter.Routes.ReceptionController$index.path());
 			} else {
 				//login failed, show the login form again, with an error
 				req.put("error", result);

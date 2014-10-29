@@ -67,6 +67,7 @@ dependencies {
   compile "com.englishtown:vertx-mod-hk2:1.8.0-SNAPSHOT"
   compile "com.englishtown:vertx-mod-elasticsearch:1.2.0"
   compile "org.mindrot:jbcrypt:0.3m"
+  compile "dk.brics.automaton:automaton:1.11-8"
   compile "com.google.javascript:closure-compiler:v20140508"
   //compile "com.google.template:soy:2012-12-21"
   compile "nathancomstock.github:closure-templates:2014-04-22"

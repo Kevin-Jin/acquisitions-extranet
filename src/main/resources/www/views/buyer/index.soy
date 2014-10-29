@@ -1,9 +1,10 @@
 {namespace com.spoutouts.acqnet.buyer}
 
 /**
- * @param pagename The title.
  */
 {template .index autoescape="strict" kind="html"}
+{@param pagename: string} /** the page title */
+{@param routes: map<string, list<string>>} /** web pages */
 {call com.spoutouts.acqnet.base data="all"}{param context: 'buyer' /}{param layout kind="html"}
 	<div id="page" class="section"><div class="centerline">
 		<div class="plate">
@@ -14,7 +15,7 @@
 			<span style="display: block; margin: 10px 0"><span style="font-weight:bold">You</span> choose your price point. <span style="font-weight:bold">You</span> find the most passionate seller. <span style="font-weight:bold;font-style:italic">We</span> take care of the boring stuff. <!--<span style="font-weight:bold">You</span> expand your business. <span style="font-style:italic">That's it</span>.--></span>
 			<span style="display: block; margin: 10px 0">Check out our <a href="#">rate schedule</a>.</span>
 			<h3>Communication simplified.</h3>
-			<a href="{ ROOT_DIR }/buyer/user/bind" class="button">Get matched today</a>
+			<a href="{ $routes['IndividualBuyerController$buyerLogin'][1] }" class="button">Get matched today</a>
 		</div>
 	</div></div>
 {/param}{/call}

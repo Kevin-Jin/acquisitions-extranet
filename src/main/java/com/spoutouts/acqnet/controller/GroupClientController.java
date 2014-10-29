@@ -5,6 +5,7 @@ import org.vertx.java.platform.Container;
 
 import com.jetdrone.vertx.yoke.middleware.YokeRequest;
 import com.spoutouts.acqnet.WebRouter;
+import com.spoutouts.acqnet.support.CsrfUtil;
 import com.spoutouts.acqnet.support.UserAuth;
 
 public class GroupClientController {
@@ -17,7 +18,10 @@ public class GroupClientController {
 	}
 
 	public void banks(YokeRequest req) {
-		req.response().redirect(WebRouter.BANKS_LOGIN);
+		if (UserAuth.getCurrentUserId(req) == -1)
+			req.response().redirect(WebRouter.Routes.GroupClientController$banksLogin.path());
+		else
+			req.response().redirect(WebRouter.Routes.GroupClientController$banksListing.path());
 	}
 
 	public void banksLogin(YokeRequest req) {
@@ -36,7 +40,7 @@ public class GroupClientController {
 					UserAuth.createPersistentLoginCookie(vertx, container, req, v -> {
 						if ("".equals(v)) {
 							//persistent login succeeded, show the home page
-							req.response().redirect(WebRouter.BANKS_HOME);
+							req.response().redirect(WebRouter.Routes.GroupClientController$banksListing.path());
 						} else {
 							//persistent login failed, show the login form again, with an error
 							req.put("error", result);
@@ -44,7 +48,7 @@ public class GroupClientController {
 						}
 					});
 				} else {
-					req.response().redirect(WebRouter.BANKS_HOME);
+					req.response().redirect(WebRouter.Routes.GroupClientController$banksListing.path());
 				}
 			} else {
 				//login failed, show the login form again, with an error
@@ -61,6 +65,17 @@ public class GroupClientController {
 
 	public void banksRegister(YokeRequest req) {
 		req.put("pagename", "Client Register");
+		req.put("csrf_token", CsrfUtil.generateToken(req));
 		req.response().render("com.spoutouts.acqnet.banks.register.soy");
+	}
+
+	public void doBanksRegister(YokeRequest req) {
+		String csrfToken = req.getFormParameter("csrf_token");
+		if (!CsrfUtil.verifyToken(req, csrfToken)) {
+			req.put("error", "An error occurred while validating your request.");
+			banksRegister(req);
+			return;
+		}
+		req.response().end();
 	}
 }
